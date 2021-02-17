@@ -1,0 +1,23 @@
+/* last.html的样式 */
+
+input,
+button {
+    outline: none;
+    text-align: center;
+}
+
+
+/* 删除按钮的样式 */
+
+.shanchu {
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.table tr:nth-child(2n) {
+    background-color: #98CEF1;
+}
+
+.table th {
+    text-align: center!important;
+}

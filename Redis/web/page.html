@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedisProject</title>
+    <!-- 引入jquery -->
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <!-- 引入模板引擎 -->
+    <script src="js/template.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js.geotools/dist/geotools.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js.geotools/dist/geotools-swedish-zipcodes.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.24.0/moment.min.js"></script>
+    <script src="./src/fancyTable.js"></script>
+    <!-- 引入last.css  -->
+    <link rel="stylesheet" href="css/last.css">
+
+    <!-- 发送ajax CREATE请求 -->
+    <script type="text/javascript">
+        function clickC() {
+            // console.log($(".button").val());
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST", //方法类型
+                // dataType: "json", //预期服务器返回的数据类型
+                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                data: "action=" + $(".button").val() + "&" + $('#form1').serialize(),
+                success: function(data) {
+                    // console.log(result); //打印服务端返回的数据(调试用)
+                    // console.log(event.status);
+                    // console.log(data);
+                    alert(data);
+                },
+                error: function() {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
+
+    <!-- 发送ajax READ请求 -->
+    <script type="text/javascript">
+        function clickR() {
+            // console.log($(".button").val());
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST", //方法类型
+                // dataType: "json", //预期服务器返回的数据类型
+                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                data: "action=" + $(".buttonR").val() + "&" + $('#form2').serialize(),
+                success: function(data) {
+                    var data1 = [];
+                    data1.push(data);
+                    data = data1;
+                    console.log(data);
+                    // console.log(result); //打印服务端返回的数据(调试用)
+                    // console.log(event.status);
+                    var tpl = template(document.getElementById('tpl').innerHTML);
+                    var html = tpl({
+                        data: data
+                    });
+                    document.getElementById('wrap').innerHTML = html;
+                    template.config({
+                        compress: true
+                    });
+                    var tpl = template(document.getElementById('tpl').innerHTML);
+                    $(document).ready(function() {
+                        // And make them fancy
+                        $("#sampleTableA").fancyTable({
+                            sortColumn: 0,
+                            pagination: true,
+                            perPage: 25,
+                            globalSearch: true
+                        });
+
+                    });
+                },
+                error: function() {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
+
+    <!-- 发送ajax UPDATE请求 -->
+    <script type="text/javascript">
+        function clickU() {
+            // console.log($(".button").val());
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST", //方法类型
+                // dataType: "json", //预期服务器返回的数据类型
+                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                data: "action=" + $(".buttonU").val() + "&" + $('#form3').serialize(),
+                success: function(data) {
+                    // console.log(result); //打印服务端返回的数据(调试用)
+                    // console.log(event.status);
+                    alert(data)
+                },
+                error: function() {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
+
+    <!-- 发送ajax DELETE请求 -->
+    <script type="text/javascript">
+        function clickD() {
+            // console.log($(".button").val());
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST", //方法类型
+                // dataType: "json", //预期服务器返回的数据类型
+                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                data: "action=" + $(".buttonD").val() + "&" + $('#form4').serialize(),
+                success: function(data) {
+                    // console.log(result); //打印服务端返回的数据(调试用)
+                    // console.log(event.status);
+                    alert(data);
+                },
+                error: function() {
+                    alert("异常！");
+                }
+            });
+
+        }
+    </script>
+
+    <!-- send函数 -->
+    <script type="text/javascript">
+        function send() {
+            // console.log($(".button").val());
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST", //方法类型
+                // dataType: "json", //预期服务器返回的数据类型
+                url: "http://yourIPAddress:5000/charfoleHyperloglog", //url
+                data: $('.sendNumber').serialize(),
+                success: function(data) {
+                    // console.log(result); //打印服务端返回的数据(调试用)
+                    // console.log(event.status);
+                    // alert(data);
+                    // console.log(data[0]);
+                    // console.log(data[1]);
+                    var msg = '';
+                    if (data[0][3] < data[1][3]) {
+                        msg += 'Redis查询速度更快，' + '快了' + ((data[1][3] / data[0][3]) - 1).toFixed(2) + '倍';
+
+                    } else {
+                        msg += '常规查询速度更快' + '快了' + ((data[0][3] / data[1][3]) - 1).toFixed(2) + '倍';
+                    }
+                    alert('Redis添加1000个不同元素时间为：' + data[0][1] +
+                        '\n' + 'Redis查询1000个不同元素的基数值为：' + data[0][2] +
+                        '\n' + 'Redis查询1000个不同元素基数的时间为：' + data[0][3] +
+                        '\n' + '常规添加1000个不同元素时间为：' + data[1][1] +
+                        '\n' + '常规查询1000个不同的基数值为：' + data[1][2] +
+                        '\n' + '常规查询1000个不同元素基数的时间为：' + data[1][3] +
+                        '\n' + msg
+                    );
+                },
+                error: function() {
+                    alert("异常！");
+                }
+            });
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/test.css">
+</head>
+
+<body>
+
+
+    <div id="wrap"></div>
+
+    <!-- 模板 -->
+    <script id="tpl" type="text/html">
+
+        <div class="htmleaf-container">
+            <div class="container" style="padding: 30px 0;">
+                <h3>Redis项目作业</h3>
+
+                <!-- 发送CREATE -->
+                <form id="form1" onsubmit="return false" action="##" method="post" style="margin: 25px 0 ">
+                    <input type="button" class="button" value="CREATE" onclick="clickC()">
+                    <input type="text" placeholder="请输入name" style="width:100px;margin: 0 25px;" name="name">
+                    <input type="text" placeholder="请输入key" style="width:100px;margin: 0 25px;" name="key">
+                    <input type="text" placeholder="请输入value" style="width:100px;margin: 0 25px;" name="value">
+                </form>
+
+                <!-- 发送READ -->
+                <form id="form2" onsubmit="return false" action="##" method="post" style="margin: 25px 0 ">
+                    <input type="button" class="buttonR" value="READ" onclick="clickR()">
+                    <input type="text" placeholder="请输入name" style="width:100px;margin: 0 25px;" name="name">
+                </form>
+
+                <!-- 发送UPDATE -->
+                <form id="form3" onsubmit="return false" action="##" method="post" style="margin: 25px 0 ">
+                    <input type="button" class="buttonU" value="UPDATE" onclick="clickU()">
+                    <input type="text" placeholder="请输入name" style="width:100px;margin: 0 25px;" name="name">
+                    <input type="text" placeholder="请输入key" style="width:100px;margin: 0 25px;" name="key">
+                    <input type="text" placeholder="请输入value" style="width:100px;margin: 0 25px;" name="value">
+                </form>
+
+                <!-- 发送DELETE -->
+                <form id="form4" onsubmit="return false" action="##" method="post" style="margin: 25px 0 ">
+                    <input type="button" class="buttonD" value="DELETE" onclick="clickD()">
+                    <input type="text" placeholder="请输入name" style="width:100px;margin: 0 25px;" name="name">
+                    <input type="text" placeholder="请输入key" style="width:100px;margin: 0 25px;" name="key">
+                </form>
+
+                <!-- 发送数字 -->
+                <form action="#" method="POST" onsubmit="return false" class="sendNumber">
+                    <input type="text" placeholder="请输入数字" name="scale">
+                    <button class="clickSendNumber" style="outline:none;" onclick="send()">点击发送输入的数字</button>
+                </form>
+
+                <table id="sampleTableA" class="table table-striped sampleTable">
+                    <thead>
+
+                        <tr>
+                            <%for(var i in data[0]) {%>
+
+                                <th>
+                                    <%=i%>
+                                </th>
+
+
+                                <%}%>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for( var i = 0 ;i < data.length ; i ++) {%>
+                            <tr>
+                                <%for(var j in data[i]) {%>
+
+                                    <td>
+                                        <%=data[i][j]%>
+                                    </td>
+
+
+                                    <%}%>
+
+                            </tr>
+                            <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </script>
+
+    <!-- 打开页面就自动获取 -->
+    <script>
+        // 通过ajax获取数据库里面的数据
+        $.ajax({
+            url: "http://yourIPAddress:5000/charfoleSearch",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                console.log(data);
+                // console.log(data[1][199]);
+                var tpl = template(document.getElementById('tpl').innerHTML);
+                var html = tpl({
+                    data: data
+                });
+                document.getElementById('wrap').innerHTML = html;
+                template.config({
+                    compress: true
+                });
+                var tpl = template(document.getElementById('tpl').innerHTML);
+                $(document).ready(function() {
+                    // And make them fancy
+                    $("#sampleTableA").fancyTable({
+                        sortColumn: 0,
+                        pagination: true,
+                        perPage: 25,
+                        globalSearch: true
+                    });
+
+                });
+
+
+            }
+        })
+    </script>
+
+</body>
+
+</html>

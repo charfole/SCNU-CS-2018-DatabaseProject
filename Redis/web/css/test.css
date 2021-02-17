@@ -1,0 +1,28 @@
+/* test的css样式 */
+
+.wrap {
+    position: relative;
+}
+
+.find {
+    margin-left: 615px;
+    margin-bottom: 100px;
+    width: 100px;
+    height: 30px;
+}
+
+h3 {
+    margin: 0 225px 0;
+}
+
+table {
+    margin: 0 auto;
+}
+
+th {
+    padding: 0 25px;
+}
+
+td {
+    text-align: center;
+}
