@@ -119,7 +119,7 @@ url: "http://yourIPAddress:5000/charfoleCRUD"
    - Redis 的基本功能，对数据库中所包含的键值对进行增删查改
    - [基数查询](https://www.runoob.com/redis/redis-hyperloglog.html)（Hyperloglog）功能
 
-由于篇幅所限，更多的功能说明请参照[项目文档]()。
+由于篇幅所限，更多的功能说明请参照[项目文档](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/tree/master/information/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3)。
 
 
 
@@ -131,7 +131,7 @@ url: "http://yourIPAddress:5000/charfoleCRUD"
 
 2. Redis
 
-   ![](README.assets/Redis项目截图.png)
+   ![](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/Redis%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
 
 ## 写在后面
 
