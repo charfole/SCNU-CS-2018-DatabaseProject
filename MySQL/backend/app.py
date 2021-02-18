@@ -1,3 +1,11 @@
+"""
+
+This file is the backend file for the redis project.
+$ gunicorn -b :5000 app:app
+repo: https://github.com/charfole/SCNU-CS-2018-DatabaseProject
+
+"""
+
 import pymysql
 import time,datetime
 from flask import Flask,flash
@@ -14,15 +22,31 @@ app = Flask(__name__)
 CORS(app)
 charfoleSqlList=[]
 
-# charfole首页 增删查改/索引/join
 @app.route('/charfole',methods=['POST','GET'])
 def charfole():
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='charfoleTable', charset='utf8')
+    """basic function for MySQL
+
+    arguments
+    -----------
+    methods : 'GET'
+        You can get the information from userTable to show in home page.
+    methods : 'POST'
+        You can upload SQL statement(string) through POST method 
+        to implement the basic function of MySQL.
+    
+    return
+    -----------
+    json
+        return the content of SQL statement.
+
+    """
+
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='charfoleTable', charset='utf8') # connect to the database
     cur = conn.cursor()
     if request.method=='GET':
         sql = "SELECT * FROM userTable"
         cur.execute(sql)
-        cols = cur.description #获取列名
+        cols = cur.description # get the name of column
         col = []
         for i in cols:
             col.append(i[0])
@@ -36,38 +60,57 @@ def charfole():
         sss={'SELECT','select'}
         if judgeString in sss:
             cur.execute(sql)
-            cols = cur.description #获取列名
+            cols = cur.description # get the name of column
             col = []
             for i in cols:
                 col.append(i[0])
-            u = list(cur.fetchall())
+            u = list(cur.fetchall()) # fetch all the content of the table
             u = jsonify(col,u)
             return u
         else:
             try:
-                # 提交到数据库执行
                 cur.execute(sql)
                 conn.commit()
                 return "SQL is successfully excuted!"
             except:
                 return "You have an error in your SQL syntax, please check and try again!",250
 
-# 输入SQL语句执行，创建删除表，增删改查，支持事务
 @app.route('/charfoleTransaction',methods=['POST'])
 def charfoleTransaction(myList = charfoleSqlList):
-    conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='charfoleTable', charset='utf8')
+    """transaction function for MySQL
+
+    arguments
+    -----------
+    methods : 'POST'
+        You can upload the transaction statement(string) through POST method 
+        to implement the basic function of MySQL.
+    action : 'execute'
+        execute the SQL statement.
+    action : 'commit'
+        commit to the database.
+    action : 'rollback'
+        rollback the execution.
+    
+    return
+    -----------
+    string
+        return the implemention status of SQL statement.
+
+    """
+
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='', db='charfoleTable', charset='utf8') # connect to the database
     cur = conn.cursor()
     sql = request.form.get('SQL')
     action = request.form.get('action')
-    ddl={'CREATE','create','DROP','drop','ALTER','alter','SELECT','select'}
-    judgeString = sql.split(' ',1)[0]
-    if judgeString in ddl and action=='execute':
+    ddl={'CREATE','create','DROP','drop','ALTER','alter','SELECT','select'} # DDL is not supported by the transaction
+    judgeString = sql.split(' ',1)[0] # judge the SQL is DDL or not
+    if judgeString in ddl and action=='execute': # execute the DDL directly
         try:
             cur.execute(sql)
             return "SQL is successfully excuted!"
         except:
             return "You have an error in your SQL syntax, please check and try again!"
-    else:
+    else: # three actions in transaction
         if(action == 'execute'):
             try:
                 cur.execute(sql)
@@ -91,11 +134,25 @@ def charfoleTransaction(myList = charfoleSqlList):
 
 @app.route('/charfoleMultipleUserEfficiency',methods=['GET'])
 def charfoleMultipleUserEfficiency():
+    """query the user information (PS: only available in the backend)
+
+    arguments
+    -----------
+    methods : 'GET'
+        get the information through GET method.
+    
+    return
+    -----------
+    json
+        return the information of the users.
+
+    """
+
     cmd = [["mysqladmin","-uroot","variables","status"],["mysqladmin","-uadmin1","variables","status"],
             ["mysqladmin","-uadmin2","variables","status"],["mysqladmin","-uadmin3","variables","status"],
-            ["mysqladmin","-uadmin4","variables","status"]]
+            ["mysqladmin","-uadmin4","variables","status"]] # excute the command in terminal through python
     result = []
-    users = ["root","admin1","admin2","admin3","admin4"]
+    users = ["root","admin1","admin2","admin3","admin4"] # maybe the users' names need to be changed
     for i in range(len(cmd)):
         print(cmd[i])
         tempShell = subprocess.Popen(cmd[i], stdout = subprocess.PIPE,

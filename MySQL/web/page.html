@@ -24,7 +24,7 @@
             $.ajax({
                 //几个参数需要注意一下
                 type: "POST", //方法类型
-                url: "http://yourIPAddress:5000/charfole", //url
+                url: "http://yourIPAddress:5000/charfole", //replace yourIPAddress to your own IP
                 data: $('#form1').serialize(),
                 success: function(result) {
                     if (result != "You have an error in your SQL syntax, please check and try again!") {
@@ -72,7 +72,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleTransaction", //url
+                url: "http://yourIPAddress:5000/charfoleTransaction", //replace yourIPAddress to your own IP
                 data: $('#form2').serialize() + "&action=execute",
                 success: function(data, textStatus, xhr) {
                     // console.log(data);
@@ -99,7 +99,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleTransaction", //url
+                url: "http://yourIPAddress:5000/charfoleTransaction", //replace yourIPAddress to your own IP
                 data: $('#form2').serialize() + "&action=rollback",
                 success: function(data, textStatus, xhr) {
                     // console.log(data);
@@ -126,7 +126,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleTransaction", //url
+                url: "http://yourIPAddress:5000/charfoleTransaction", //replace yourIPAddress to your own IP
                 data: $('#form2').serialize() + "&action=commit",
                 success: function(data, textStatus, xhr) {
                     if (xhr.status != 250) {

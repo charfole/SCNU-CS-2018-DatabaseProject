@@ -26,7 +26,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                url: "http://yourIPAddress:5000/charfoleCRUD", //replace yourIPAddress to your own IP
                 data: "action=" + $(".button").val() + "&" + $('#form1').serialize(),
                 success: function(data) {
                     // console.log(result); //打印服务端返回的数据(调试用)
@@ -49,7 +49,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                url: "http://yourIPAddress:5000/charfoleCRUD", //replace yourIPAddress to your own IP
                 data: "action=" + $(".buttonR").val() + "&" + $('#form2').serialize(),
                 success: function(data) {
                     var data1 = [];
@@ -93,7 +93,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                url: "http://yourIPAddress:5000/charfoleCRUD", //replace yourIPAddress to your own IP
                 data: "action=" + $(".buttonU").val() + "&" + $('#form3').serialize(),
                 success: function(data) {
                     // console.log(result); //打印服务端返回的数据(调试用)
@@ -115,7 +115,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleCRUD", //url
+                url: "http://yourIPAddress:5000/charfoleCRUD", //replace yourIPAddress to your own IP
                 data: "action=" + $(".buttonD").val() + "&" + $('#form4').serialize(),
                 success: function(data) {
                     // console.log(result); //打印服务端返回的数据(调试用)
@@ -138,7 +138,7 @@
                 //几个参数需要注意一下
                 type: "POST", //方法类型
                 // dataType: "json", //预期服务器返回的数据类型
-                url: "http://yourIPAddress:5000/charfoleHyperloglog", //url
+                url: "http://yourIPAddress:5000/charfoleHyperloglog", //replace yourIPAddress to your own IP
                 data: $('.sendNumber').serialize(),
                 success: function(data) {
                     // console.log(result); //打印服务端返回的数据(调试用)
