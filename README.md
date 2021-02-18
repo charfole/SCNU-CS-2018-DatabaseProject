@@ -4,6 +4,8 @@
 
 本项目选用的是 MySQL 和 Redis ，由于课程不对性能作要求，因此为了能够快速实现要求的功能，项目选用了 Flask 作为服务端，并以 web 的方式开发客户端，具体的项目框架请参照下图。
 
+![架构图](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+
 
 ## 开发环境与依赖
 
@@ -11,9 +13,9 @@
 
 **python 3.6**
 
-MySQL 8.0.21
+**MySQL 8.0.21**
 
-Redis 5.0.3
+**Redis 5.0.3**
 
 其余依赖均包含在项目对应的虚拟环境文件夹 (DatabaseVenv) 
 
@@ -124,9 +126,12 @@ url: "http://yourIPAddress:5000/charfoleCRUD"
 ## 项目截图
 
 1. MySQL
+
+   ![](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
+
 2. Redis
 
-
+   ![](README.assets/Redis项目截图.png)
 
 ## 写在后面
 
