@@ -4,12 +4,13 @@
 
 本项目选用的是 MySQL 和 Redis ，由于课程不对性能作要求，因此为了能够快速实现要求的功能，项目选用了 Flask 作为服务端，并以 web 的方式开发客户端，具体的项目框架请参照下图。
 
-![架构图](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
+![架构图](https://github.com/charfole/SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E6%9E%B6%E6%9E%84%E5%9B%BE.png)
 
 
 ## 开发环境与依赖
 
-**CentOS Linux release 8.3.2011** (项目使用阿里云ECS，可兼容其他类型云服务器或虚拟机，尚未在其它系统实现，因此不保证兼容性)
+**CentOS Linux release 8.3.2011** 
+(项目使用阿里云ECS，可兼容其他类型云服务器或虚拟机，尚未在其它系统实现，因此不保证兼容性)
 
 **python 3.6**
 
@@ -26,13 +27,13 @@
 1. clone 本仓库
 
    ```shell
-   git clone https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject.git
-   cd charfole-SCNU-CS-2018-DatabaseProject
+   git clone https://github.com/charfole/SCNU-CS-2018-DatabaseProject.git
+   cd SCNU-CS-2018-DatabaseProject
    ```
 
 2. 在 Linux 环境下安装相关依赖
 
-   安装Python环境、MySQL和Redis环境，安装教程可参照[菜鸟教程](https://www.runoob.com/)
+   安装Python环境、MySQL和Redis环境，安装教程可参照菜鸟教程([python](https://www.runoob.com/python3/python3-install.html), [MySQL](https://www.runoob.com/mysql/mysql-install.html), [Redis](https://www.runoob.com/redis/redis-install.html))
 
 3. 部署 MySQL 项目
 
@@ -59,7 +60,7 @@
    - 部署后端代码
 
      ```shell
-     source ./DatabaseVenv/bin/activate
+     source ../DatabaseVenv/bin/activate
      cd MySQL/backend
      gunicorn -b :5000 app:app # debug模式运行
      gunicorn -c config.py app:app # config模式运行
@@ -90,7 +91,7 @@
    - 部署后端代码
 
      ```shell
-     source ./DatabaseVenv/bin/activate
+     source ../DatabaseVenv/bin/activate
      cd MySQL/backend
      gunicorn -b :5000 app:app # debug模式运行
      gunicorn -c config.py app:app # config模式运行
@@ -119,7 +120,7 @@ url: "http://yourIPAddress:5000/charfoleCRUD"
    - Redis 的基本功能，对数据库中所包含的键值对进行增删查改
    - [基数查询](https://www.runoob.com/redis/redis-hyperloglog.html)（Hyperloglog）功能
 
-由于篇幅所限，更多的功能说明请参照[项目文档](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/tree/master/information/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3)。
+由于篇幅所限，更多的功能说明请参照[项目文档](https://github.com/charfole/SCNU-CS-2018-DatabaseProject/tree/master/information/%E9%A1%B9%E7%9B%AE%E6%96%87%E6%A1%A3)。
 
 
 
@@ -127,11 +128,11 @@ url: "http://yourIPAddress:5000/charfoleCRUD"
 
 1. MySQL
 
-   ![](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
+   ![](https://github.com/charfole/SCNU-CS-2018-DatabaseProject/blob/master/information/MySQL%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
 
 2. Redis
 
-   ![](https://github.com/charfole/charfole-SCNU-CS-2018-DatabaseProject/blob/master/information/Redis%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
+   ![](https://github.com/charfole/SCNU-CS-2018-DatabaseProject/blob/master/information/Redis%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE.png)
 
 ## 写在后面
 
