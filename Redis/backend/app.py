@@ -2,6 +2,7 @@
 """
 
 This file is the backend file for the redis project.
+$ gunicorn -b :5000 app:app
 repo: https://github.com/charfole/SCNU-CS-2018-DatabaseProject
 
 """
@@ -19,10 +20,23 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# information search
 @app.route('/charfoleSearch',methods=['GET'])
 def charfole():
-    r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0, decode_responses=True)
+    """get the content in redis database
+
+    arguments
+    -----------
+    methods : 'GET'
+        You can get the data to show in home page.
+    
+    return
+    -----------
+    json
+        return the content.
+
+    """
+
+    r = redis.StrictRedis(host='127.0.0.1', port=6379, db=0, decode_responses=True) # connect to the database 0
     rowsName = sorted(r.keys())
     data = []
     for i in range(len(rowsName)):
@@ -33,10 +47,37 @@ def charfole():
 
     return jsonify(data)
 
-# CRUD
 @app.route('/charfoleCRUD',methods=['POST'])
 def charfoleString():
-    r = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True)  
+    """implement the CRUD function in redis database
+
+    arguments
+    -----------
+    methods : 'POST'
+        POST the content of the name, key or value
+    name : string
+        name of the key-value
+    key : string
+        name of the key
+    value : string
+        name of the value
+    action : 'CREATE'
+        create a new key-value pair
+    action : 'READ'
+        read the key-balue by name
+    action : 'UPDATE'
+        update a key-value pair
+    action : 'DELETE'
+        delete a key-value pair
+
+    return
+    -----------
+    string
+        return the implemention status.
+
+    """
+
+    r = redis.Redis(host='localhost', port=6379, db=0,decode_responses=True) # connect to the database 0
     action = request.form.get('action')
     name = request.form.get('name')
     key = request.form.get('key')
@@ -78,10 +119,25 @@ def charfoleString():
 
     return 'The action must be in this list:[CREATE,READ,UPDATE,DELETE]!'
 
-# cardinal number query
 @app.route('/charfoleHyperloglog',methods=['POST'])
 def charfoleHyperloglog():
-    redisHyper= redis.StrictRedis(host='127.0.0.1', port=6379, db=1, decode_responses=True)
+    """cardinal number query
+
+    arguments
+    -----------
+    methods : 'POST'
+        post the value of the scale
+    scale : int
+        value of the scale
+
+    return
+    -----------
+    json
+        return the hyperloglog result.
+
+    """
+    
+    redisHyper= redis.StrictRedis(host='127.0.0.1', port=6379, db=1, decode_responses=True) # connect to the database 1
     redisHyper.flushdb()
     scale = request.form.get('scale')
     scale = int(scale)

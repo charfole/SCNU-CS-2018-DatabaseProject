@@ -1,3 +1,11 @@
+"""
+
+This file is intended for running gunicorn in config motion.
+$ gunicorn -c config.py app:app
+repo: https://github.com/charfole/SCNU-CS-2018-DatabaseProject
+
+"""
+
 import  os
 import multiprocessing
 debug = False
