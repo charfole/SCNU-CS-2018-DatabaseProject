@@ -33,7 +33,7 @@
 
 2. 在 Linux 环境下安装相关依赖
 
-   安装Python环境、MySQL和Redis环境，安装教程可参照菜鸟教程([python](https://www.runoob.com/python3/python3-install.html), [MySQL](https://www.runoob.com/mysql/mysql-install.html), [Redis](https://www.runoob.com/redis/redis-install.html))
+   安装Python、MySQL和Redis，安装教程可参照菜鸟教程([Python](https://www.runoob.com/python3/python3-install.html), [MySQL](https://www.runoob.com/mysql/mysql-install.html), [Redis](https://www.runoob.com/redis/redis-install.html))
 
 3. 部署 MySQL 项目
 
