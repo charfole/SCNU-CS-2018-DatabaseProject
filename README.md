@@ -10,7 +10,7 @@
 ## 开发环境与依赖
 
 **CentOS Linux release 8.3.2011** 
-(项目使用阿里云ECS，可兼容其他类型云服务器或虚拟机，尚未在其它系统实现，因此不保证兼容性)
+(项目使用阿里云 ECS 开发，程序可兼容 Linux 系统，尚未在其它类型的系统实现，因此不保证兼容性)
 
 **python 3.6**
 
@@ -99,14 +99,14 @@
 
 6. 修改 Redis 客户端对应的 IP 地址
 
-```javascript
-// 打开 Redis/web/page.html
-// 根据个人情况，将所有出现yourIPAddress语句中的yourIPAddress替换为你部署flask的ip（服务器ip或者是虚拟机的ip）
+   ```javascript
+   // 打开 Redis/web/page.html
+   // 根据个人情况，将所有出现yourIPAddress语句中的yourIPAddress替换为你部署flask的ip（服务器ip或者是虚拟机的ip）
 
-url: "http://yourIPAddress:5000/charfoleCRUD"
+   url: "http://yourIPAddress:5000/charfoleCRUD"
 
-// 修改完后，打开page.html并刷新即可成功运行项目
-```
+   // 修改完后，打开page.html并刷新即可成功运行项目
+   ```
 
 
 
